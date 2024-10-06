@@ -1,4 +1,8 @@
 '''
+https://www.acmicpc.net/problem/11403
+'''
+
+'''
 3
 0 1 0
 0 0 1

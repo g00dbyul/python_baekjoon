@@ -1,4 +1,8 @@
 '''
+https://www.acmicpc.net/problem/10026
+'''
+
+'''
 5
 RRRBB
 GGBBB

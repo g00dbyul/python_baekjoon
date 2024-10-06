@@ -1,4 +1,8 @@
 '''
+https://www.acmicpc.net/problem/2206
+'''
+
+'''
 6 4
 0100
 1110
@@ -42,8 +46,6 @@ def bfs(matrix):
     while queue:
         x,y,z = queue.popleft()
         if x == n-1 and y == m-1:
-            for i in visited:
-                print(i)
             return visited[x][y][z]
         for dx,dy in dxdy:
             nx, ny = x + dx, y + dy
