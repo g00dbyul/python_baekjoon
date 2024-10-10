@@ -11,4 +11,3 @@ def product(n, new_arr):
         product(n, new_arr + [arr[i]])
 
 product(3, [])
-

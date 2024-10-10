@@ -9,65 +9,89 @@
 
 29
 '''
-#
-# R, C, K = map(int, input().split())
-#
-# forest = [[0] * C for _ in range(R)]
-#
-# for _ in range(K):
-#     start, exit = map(int, input().split())
 
-# 기본 설정 및 입력 파싱
+from collections import deque
+
+# 이동 우선순위 : 남 > 서 > 동
 R, C, K = map(int, input().split())
-
-goelems = []
+# R : 높이, C: 넓이
+forest = [[0] * (C) for _ in range(R)]
+golem_list = []
 for _ in range(K):
-    c, d = map(int, input().split())
-    goelems.append((c, d))
+    start, exit = map(int, input().split())
+    golem_list.append((start, exit))
 
-# 숲의 상태를 나타내는 배열 초기화
-forest = [[False] * C for _ in range(R)]
+# 해당 좌표가 이동 가능한지 확인
 
-# 방향 설정 (0: 북, 1: 동, 2: 남, 3: 서)
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
+def check(x,y):
+    if y < 0:
+        return (0 <= x < C) and (y < R)
+    else:
+        return (0 <= x < C) and (y < R) and (forest[y][x] == 0)
 
-def is_valid(x, y):
-    return 0 <= x < R and 0 <= y < C
+stamp = {
+    0: (0, -1),
+    1: (1, 0),
+    2: (0, 1),
+    3: (-1, 0),
+    4: (0, 0)
+}
 
-# 골렘이 이동할 수 있는 최대 위치까지 이동 후, 정령이 최종적으로 도달한 행 번호를 반환하는 함수
-def move_golem(c, d):
-    # 초기 골렘 위치 (c가 중앙 열)
-    x, y = 0, c - 1
+result = 0
+
+def bfs(x,y):
+    global result
+    dxdy = [(0,-1), (0,1), (-1,0), (1,0)]
+    queue = deque([])
+    visited = [[False] * (C) for _ in range(R)]
+
+    queue.append((x,y))
+    visited[y][x] = True
+    layers = []
+
+    while queue:
+        pop_x, pop_y = queue.popleft()
+        layers.append(pop_y)
+        for dx, dy in dxdy:
+            # 우선 같은 인덱스 안 에서만 탐색 가능
+            if 0 <= pop_x+dx < C and 0 <= pop_y+dy < R:
+                if (abs(forest[pop_y+dy][pop_x+dx]) == abs(forest[pop_y][pop_x])) and visited[pop_y+dy][pop_x+dx] == False:
+                    queue.append((pop_x+dx, pop_y+dy))
+                    visited[pop_y+dy][pop_x+dx] = True
+                elif forest[pop_y][pop_x] < 0 and forest[pop_y+dy][pop_x+dx] != 0 and visited[pop_y+dy][pop_x+dx] == False:
+                    queue.append((pop_x + dx, pop_y + dy))
+                    visited[pop_y + dy][pop_x + dx] = True
+    # print("Layer",max(layers))
+    result = result + (max(layers) + 1)
+
+
+for index, golem in enumerate(golem_list):
+    position_x, position_y, exit = golem[0]-1, -2, golem[1]
     while True:
-        # 남쪽으로 한 칸 내려갈 수 있는지 확인
-        if x + 1 < R and not forest[x + 1][y]:
-            x += 1
-            forest[x][y] = True
+        if check(position_x-1, position_y+1) and check(position_x, position_y+2) and check(position_x+1, position_y+1):
+            position_y = position_y + 1
+        elif check(position_x-1, position_y-1) and check(position_x-2, position_y) and check(position_x-1, position_y+1) and check(position_x-2, position_y+1) and check(position_x-1, position_y+2):
+            position_y = position_y + 1
+            position_x = position_x - 1
+            exit = (exit - 1) % 4
+        elif check(position_x+1, position_y-1) and check(position_x+2, position_y) and check(position_x+1, position_y+1) and check(position_x+2, position_y+1) and check(position_x+1, position_y+2):
+            position_y = position_y + 1
+            position_x = position_x + 1
+            exit = (exit + 1) % 4
         else:
-            # 서쪽으로 회전할 수 있는지 확인
-            if y - 1 >= 0 and not forest[x + 1][y - 1]:
-                y -= 1
-                x += 1
-                forest[x][y] = True
-                d = (d + 3) % 4  # 서쪽으로 회전하면 반시계 방향으로 출구 이동
-            # 동쪽으로 회전할 수 있는지 확인
-            elif y + 1 < C and not forest[x + 1][y + 1]:
-                y += 1
-                x += 1
-                forest[x][y] = True
-                d = (d + 1) % 4  # 동쪽으로 회전하면 시계 방향으로 출구 이동
+            if position_y < 1:
+                # 지도 초기화
+                forest = [[0] * (C) for _ in range(R)]
             else:
-                break  # 더 이상 이동할 수 없으면 종료
-    return x + 1  # 정령이 도달한 최종 행 번호 (1-based)
+                # 지도그리기
+                for s in stamp:
+                    dx, dy = stamp[s]
+                    forest[position_y + dy][position_x + dx] = index + 1
+                    if s == exit:
+                        forest[position_y + dy][position_x + dx] = -(index + 1)
+                    else:
+                        forest[position_y + dy][position_x + dx] = index + 1
+                bfs(position_x, position_y)
+            break
 
-# 최종 위치 합계
-final_sum = 0
-
-# 각 골렘에 대해 이동 시뮬레이션
-for c, d in goelems:
-    result = move_golem(c, d)
-    final_sum += result
-
-# 결과 출력
-print(final_sum)
+print(result)

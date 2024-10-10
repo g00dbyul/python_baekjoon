@@ -18,7 +18,6 @@ def rotate_180(arr):
 
     for i in range(height):
         for j in range(width):
-            # 회전 되는 배열의 행은 기존 배열의
             rotated[height-1-i][width-1-j] = arr[i][j]
     return rotated
 
