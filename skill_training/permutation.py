@@ -18,4 +18,4 @@ def permutation(n, new_arr):
 
 
 # permutation(2, [])
-permutation(3, [])
+permutation(2, [])

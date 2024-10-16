@@ -28,7 +28,7 @@ def gravity():
 
 gravity()
 
-# print('After')
-# for a in arr:
-#     print(a)
+print('After')
+for a in arr:
+    print(a)
 
