@@ -18,6 +18,7 @@ front
 '''
 
 '''
+https://www.acmicpc.net/problem/10866
     push_front X: 정수 X를 덱의 앞에 넣는다.
     push_back X: 정수 X를 덱의 뒤에 넣는다.
     pop_front: 덱의 가장 앞에 있는 수를 빼고, 그 수를 출력한다. 만약, 덱에 들어있는 정수가 없는 경우에는 -1을 출력한다.

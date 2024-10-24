@@ -5,6 +5,9 @@
 88 186
 60 175
 46 155
+
+
+https://www.acmicpc.net/problem/7568
 '''
 
 N = int(input())

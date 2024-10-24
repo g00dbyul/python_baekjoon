@@ -1,7 +1,7 @@
 '''
 7 3
 
-
+https://www.acmicpc.net/problem/2960
 '''
 
 N, K = map(int, input().split())

@@ -5,6 +5,8 @@
     toggle x: S에 x가 있으면 x를 제거하고, 없으면 x를 추가한다. (1 ≤ x ≤ 20)
     all: S를 {1, 2, ..., 20} 으로 바꾼다.
     empty: S를 공집합으로 바꾼다.
+
+https://www.acmicpc.net/problem/11723
 '''
 
 '''

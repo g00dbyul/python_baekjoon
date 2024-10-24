@@ -1,4 +1,6 @@
 '''
+https://www.acmicpc.net/problem/2563
+
 3
 3 7
 15 7

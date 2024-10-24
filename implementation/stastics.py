@@ -10,6 +10,8 @@
 2
 1
 10
+
+https://www.acmicpc.net/problem/2108
 '''
 import sys
 input = sys.stdin.readline

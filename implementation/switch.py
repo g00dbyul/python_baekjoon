@@ -4,6 +4,9 @@
 2
 1 3
 2 3
+
+
+https://www.acmicpc.net/problem/1244
 '''
 
 n = int(input())

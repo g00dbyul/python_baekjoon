@@ -6,6 +6,8 @@
 1 2 3 4
 6 0
 1 1 9 1 1 1
+
+https://www.acmicpc.net/problem/1966
 '''
 
 from collections import deque

@@ -7,6 +7,8 @@ noojkeab enilno egduj
 
 <ab cd>ef gh<ij kl>
 <ab cd>fe hg<ij kl>
+
+https://www.acmicpc.net/problem/17413
 '''
 
 from collections import deque
