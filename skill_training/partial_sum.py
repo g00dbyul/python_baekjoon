@@ -11,7 +11,7 @@ def partial_sum(arr, number):
 
 '''
 예시가 굉장히 뭐 같은데... 내가 만들 수 없다 ㅠ
-start는 0부터 시작 한다는 전재, end를 부분합이 number다 커질때까지 늘린다.
+start는 0부터 시작 한다는 전재, end를 부분합이 number보다 커질때까지 늘린다.
 부분합이 num랑 같은지 비교
 start를 늘린다. 
 '''

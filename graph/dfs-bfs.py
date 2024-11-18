@@ -30,7 +30,6 @@ def dfs(graph, visited, start):
         if visited[point] == False:
             dfs(graph, visited, point)
 
-
 def bfs(graph, visited, start):
     queue = deque([])
     queue.append(start)

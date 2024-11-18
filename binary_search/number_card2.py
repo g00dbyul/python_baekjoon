@@ -8,17 +8,6 @@ https://www.acmicpc.net/problem/10816
 '''
 import sys
 input = sys.stdin.readline
-def find_number_count(cards, target):
-    card_dict = {}
-    for card in cards:
-        if card in card_dict:
-            card_dict[card] = card_dict[card] + 1
-        else:
-            card_dict[card] = 1
-
-    if target in card_dict:
-        return card_dict[target]
-    return 0
 
 N = int(input())
 cards = sorted(
